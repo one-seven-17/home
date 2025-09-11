@@ -3,17 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1-7</title>
+    <title>1:7 (One-Seven)</title>
     <style>
+        /* Import the font from zsfcat */
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+        
         body {
-            background-color: black;
-            color: white;
-            font-family: monospace;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Share Tech Mono', monospace;
             margin: 0;
             padding: 20px;
-            height: 100vh;
-            overflow: hidden;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+        
+        h1 {
+            font-size: 3em;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            color: #888;
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+        
+        .chat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 40px 0;
+        }
+        
+        .chat-room {
+            border: 1px solid #333;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            background-color: #0a0a0a;
+        }
+        
+        .chat-room:hover {
+            border-color: #fff;
+            background-color: #111;
+        }
+        
+        .chat-room a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            height: 100%;
+            width: 100%;
+            font-size: 1.1em;
+        }
+        
+        .room-purpose {
+            display: block;
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 8px;
+        }
+        
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #444;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        
+        .blinker {
+            animation: blink 1s step-start infinite;
+            color: #fff;
+        }
+        
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        /* Simple terminal effect */
+        .terminal {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.8em;
+            color: #444;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .chat-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2em;
+            }
         }
     </style>
-    <p>1-7</p>
 </head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>1:7</h1>
+            <div class="subtitle">One-Seven Chat Network</div>
+        </div>
+        
+        <div class="chat-grid">
+            <div class="chat-room">
+                <a href="https://one-seven-17.github.io/zsfcat/" target="_blank">
+                    zsfcat
+                    <span class="room-purpose">(general)</span>
+                </a>
+            </div>
+            <!-- More rooms can be added here in the future -->
+        </div>
+        
+        <div class="footer">
+            <p>1:7 Network &copy; 2023 | Established: <span id="established"></span></p>
+            <p>Connected: <span id="visitor-count">1</span> user<span class="blinker">_</span></p>
+        </div>
+    </div>
+
+    <div class="terminal">
+        [1:7@home ~]$ connected
+    </div>
+
+    <script>
+        // Set established date
+        document.getElementById('established').textContent = new Date().getFullYear();
+        
+        // Simple visitor counter (using localStorage)
+        let visitorCount = localStorage.getItem('visitorCount');
+        if (!visitorCount) {
+            visitorCount = Math.floor(Math.random() * 10) + 1;
+        } else {
+            visitorCount = parseInt(visitorCount) + 1;
+        }
+        localStorage.setItem('visitorCount', visitorCount);
+        document.getElementById('visitor-count').textContent = visitorCount;
+        
+        // Add a subtle typing effect to the terminal
+        const terminal = document.querySelector('.terminal');
+        let terminalText = terminal.textContent;
+        terminal.textContent = '';
+        
+        let charIndex = 0;
+        function typeTerminal() {
+            if (charIndex < terminalText.length) {
+                terminal.textContent += terminalText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeTerminal, 50);
+            }
+        }
+        
+        // Start typing after a delay
+        setTimeout(typeTerminal, 1000);
+    </script>
+</body>
+</html>
